@@ -13,8 +13,6 @@ import { registerBlockType } from '@wordpress/blocks';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './style.scss';
-// 設定画面用スタイルの読み込み
-import './admin.scss';
 /**
  * Internal dependencies
  */
