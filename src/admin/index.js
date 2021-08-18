@@ -14,8 +14,12 @@ import api from '@wordpress/api';
 // Adminコンポーネント
 const Admin = () => {
 
+    // symbols
+    const symbols = /[\r\n%#()<>?[\\\]^`{|}]/g;
+
     // stateの初期値設定
-    const [text, setText] = useState('初期値');
+    const [rowSvg, setText] = useState('初期値');
+    const [outputSVG, setOutputSVG] = useState();
 
     // 取得した設定値をstateに反映
     useEffect(() => {
@@ -27,38 +31,59 @@ const Admin = () => {
         });
     }, []);
 
+    // SVGにnamespaceを追加する
+    const addNameSpace = (data) => {
+        data.trim();
+        if (data.indexOf(`http://www.w3.org/2000/svg`) < 0) {
+            data = data.replace(/<svg/g, `<svg xmlns="http://www.w3.org/2000/svg"`);
+        }
+        return data;
+    };
+
+    // SVGをエンコードする
+    const encodeSVG = (data) => {
+        data = data.replace(/"/g, `'`);
+        data = data.replace(/>\s{1,}</g, `><`);
+        data = data.replace(/\s{2,}/g, ` `);
+
+        // Using encodeURIComponent() as replacement function
+        return data.replace(symbols, encodeURIComponent);
+    }
+
+    // CSS用にヘッダーをつける
+    const readyForCSS = (data) => {
+        data = `url("data:image/svg+xml,${data}")`;
+        return data;
+    }
+
     // 設定項目の登録
     const onClick = () => {
-        api.loadPromise.then( () => {
+
+        const nameSpaced = addNameSpace(rowSvg);
+        console.log(nameSpaced);
+        const encoded = encodeSVG(nameSpaced);
+        console.log(encoded);
+        const resultCSS = readyForCSS(encoded);
+        setOutputSVG(resultCSS);
+
+        api.loadPromise.then(() => {
             const model = new api.models.Settings({
-                'altslogo_base_svg_tags': text
+                'altslogo_base_svg_tags': rowSvg
             });
-    
+
             const save = model.save();
-    
-            save.success( ( response, status ) => {
-                console.log( response );
-                console.log( status );
+
+            save.success((response, status) => {
+                console.log(response);
+                console.log(status);
             });
-    
-            save.error( ( response, status) => {
-                console.log( response );
-                console.log( status );
+
+            save.error((response, status) => {
+                console.log(response);
+                console.log(status);
             });
         });
     };
-
-    // // クライアントの準備ができてから実行
-    // api.loadPromise.then(() => {
-
-    //     // Modelの生成
-    //     const model = new api.models.Settings();
-
-    //     // 設定値の取得
-    //     model.fetch().then(response => {
-    //         console.log(response);
-    //     });
-    // });
 
     return (
         <div className="wrapper">
@@ -66,16 +91,23 @@ const Admin = () => {
             <div className="logo-svg">
                 <TextControl
                     label="Logo SVG"
-                    value={text}
+                    value={rowSvg}
                     onChange={(value) => setText(value)}
                 />
             </div>
             <Button
                 isPrimary
-                onClick={ onClick }
+                onClick={onClick}
             >
                 設定を保存
             </Button>
+            <div className="encodeSVG">{outputSVG}</div>
+            {outputSVG &&
+                <div
+                    className="previewSVG"
+                    style={{ backgroundColor: "white", backgroundImage: outputSVG }}
+                />
+            }
         </div>
     )
 }

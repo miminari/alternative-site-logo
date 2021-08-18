@@ -127,8 +127,11 @@ __webpack_require__.r(__webpack_exports__);
  // Adminコンポーネント
 
 const Admin = () => {
-  // stateの初期値設定
-  const [text, setText] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])('初期値'); // 取得した設定値をstateに反映
+  // symbols
+  const symbols = /[\r\n%#()<>?[\\\]^`{|}]/g; // stateの初期値設定
+
+  const [rowSvg, setText] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])('初期値');
+  const [outputSVG, setOutputSVG] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(); // 取得した設定値をstateに反映
 
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     _wordpress_api__WEBPACK_IMPORTED_MODULE_3___default.a.loadPromise.then(() => {
@@ -137,12 +140,44 @@ const Admin = () => {
         setText(response.altslogo_base_svg_tags);
       });
     });
-  }, []); // 設定項目の登録
+  }, []); // SVGにnamespaceを追加する
+
+  const addNameSpace = data => {
+    data.trim();
+
+    if (data.indexOf(`http://www.w3.org/2000/svg`) < 0) {
+      data = data.replace(/<svg/g, `<svg xmlns="http://www.w3.org/2000/svg"`);
+    }
+
+    return data;
+  }; // SVGをエンコードする
+
+
+  const encodeSVG = data => {
+    data = data.replace(/"/g, `'`);
+    data = data.replace(/>\s{1,}</g, `><`);
+    data = data.replace(/\s{2,}/g, ` `); // Using encodeURIComponent() as replacement function
+
+    return data.replace(symbols, encodeURIComponent);
+  }; // CSS用にヘッダーをつける
+
+
+  const readyForCSS = data => {
+    data = `url("data:image/svg+xml,${data}")`;
+    return data;
+  }; // 設定項目の登録
+
 
   const onClick = () => {
+    const nameSpaced = addNameSpace(rowSvg);
+    console.log(nameSpaced);
+    const encoded = encodeSVG(nameSpaced);
+    console.log(encoded);
+    const resultCSS = readyForCSS(encoded);
+    setOutputSVG(resultCSS);
     _wordpress_api__WEBPACK_IMPORTED_MODULE_3___default.a.loadPromise.then(() => {
       const model = new _wordpress_api__WEBPACK_IMPORTED_MODULE_3___default.a.models.Settings({
-        'altslogo_base_svg_tags': text
+        'altslogo_base_svg_tags': rowSvg
       });
       const save = model.save();
       save.success((response, status) => {
@@ -154,16 +189,7 @@ const Admin = () => {
         console.log(status);
       });
     });
-  }; // // クライアントの準備ができてから実行
-  // api.loadPromise.then(() => {
-  //     // Modelの生成
-  //     const model = new api.models.Settings();
-  //     // 設定値の取得
-  //     model.fetch().then(response => {
-  //         console.log(response);
-  //     });
-  // });
-
+  };
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "wrapper"
@@ -171,12 +197,20 @@ const Admin = () => {
     className: "logo-svg"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["TextControl"], {
     label: "Logo SVG",
-    value: text,
+    value: rowSvg,
     onChange: value => setText(value)
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     isPrimary: true,
     onClick: onClick
-  }, "\u8A2D\u5B9A\u3092\u4FDD\u5B58"));
+  }, "\u8A2D\u5B9A\u3092\u4FDD\u5B58"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "encodeSVG"
+  }, outputSVG), outputSVG && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "previewSVG",
+    style: {
+      backgroundColor: "white",
+      backgroundImage: outputSVG
+    }
+  }));
 }; // AdminコンポーネントをルートDOMにレンダリング
 
 
