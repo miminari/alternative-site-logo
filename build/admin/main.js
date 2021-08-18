@@ -112,20 +112,97 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _admin_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin.scss */ "./src/admin/admin.scss");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/api */ "@wordpress/api");
+/* harmony import */ var _wordpress_api__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api__WEBPACK_IMPORTED_MODULE_3__);
 
 // 設定画面用
  // renderメソッドのインポート
 
+ // Componentのインポート
+
+ // APIのインポート
+
  // Adminコンポーネント
 
 const Admin = () => {
+  // stateの初期値設定
+  const [text, setText] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])('初期値'); // 取得した設定値をstateに反映
+
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    _wordpress_api__WEBPACK_IMPORTED_MODULE_3___default.a.loadPromise.then(() => {
+      const model = new _wordpress_api__WEBPACK_IMPORTED_MODULE_3___default.a.models.Settings();
+      model.fetch().then(response => {
+        setText(response.altslogo_base_svg_tags);
+      });
+    });
+  }, []); // 設定項目の登録
+
+  const onClick = () => {
+    _wordpress_api__WEBPACK_IMPORTED_MODULE_3___default.a.loadPromise.then(() => {
+      const model = new _wordpress_api__WEBPACK_IMPORTED_MODULE_3___default.a.models.Settings({
+        'altslogo_base_svg_tags': text
+      });
+      const save = model.save();
+      save.success((response, status) => {
+        console.log(response);
+        console.log(status);
+      });
+      save.error((response, status) => {
+        console.log(response);
+        console.log(status);
+      });
+    });
+  }; // // クライアントの準備ができてから実行
+  // api.loadPromise.then(() => {
+  //     // Modelの生成
+  //     const model = new api.models.Settings();
+  //     // 設定値の取得
+  //     model.fetch().then(response => {
+  //         console.log(response);
+  //     });
+  // });
+
+
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: ""
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "Alternative Site Log Config"));
+    className: "wrapper"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "Alternative Site Log Config"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "logo-svg"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["TextControl"], {
+    label: "Logo SVG",
+    value: text,
+    onChange: value => setText(value)
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    isPrimary: true,
+    onClick: onClick
+  }, "\u8A2D\u5B9A\u3092\u4FDD\u5B58"));
 }; // AdminコンポーネントをルートDOMにレンダリング
 
 
 Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["render"])(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Admin, null), document.getElementById('altslogo_admin'));
+
+/***/ }),
+
+/***/ "@wordpress/api":
+/*!*****************************!*\
+  !*** external ["wp","api"] ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["api"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["components"]; }());
 
 /***/ }),
 

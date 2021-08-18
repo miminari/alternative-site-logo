@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"main.css","sourceRoot":""}
+{"version":3,"sources":["webpack:///./src/admin/admin.scss"],"names":[],"mappings":"AACI;EACI;EACA;EACA;AAAR,C","file":"main.css","sourcesContent":["#altslogo_admin {\n    .components-base-control {\n        width: 80vw;\n        max-width: 40em;\n        margin-bottom: 1em;\n    }\n}"],"sourceRoot":""}
