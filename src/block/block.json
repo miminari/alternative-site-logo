@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "alternative-site-logo/alternative-site-logo",
+	"version": "0.1.0",
+	"title": "Alternative Site Logo",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"keywords": [ "logo" ],
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"color": {
+			"text": false,
+			"background": true
+		}
+	},
+	"textdomain": "altslogo"
+}

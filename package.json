@@ -7,6 +7,7 @@
 	"main": "build/index.js",
 	"scripts": {
 		"build": "wp-scripts build",
+		"build:dev": "wp-scripts build --mode=development",
 		"build:admin": "npx webpack --config webpack.config.admin.js",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",

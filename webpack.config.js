@@ -6,7 +6,7 @@ module.exports = {
 	entry: './src/block/index.js',
     //アウトプット先
 	output: {
-		path: path.resolve(__dirname, 'build/block/'),
-		filename: '[name].js',
+		...defaultConfig.output,
+		path: path.resolve(__dirname, 'build/block/')
 	},
 }

@@ -87,7 +87,7 @@ const Admin = () => {
 
     return (
         <div className="wrapper">
-            <h1>Alternative Site Log Config</h1>
+            <h1>Alternative Site Logo Config</h1>
             <div className="logo-svg">
                 <TextControl
                     label="Logo SVG"

@@ -28,10 +28,11 @@ define( 'ALTSLOGO_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
  *
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/writing-your-first-block-type/
  */
-function altslogo_create_block_alternative_site_logo_block_init() {
-	register_block_type( __DIR__ );
-}
-add_action( 'init', 'altslogo_create_block_alternative_site_logo_block_init' );
+// function altslogo_create_block_alternative_site_logo_block_init() {
+// 	register_block_type( __DIR__ );
+// }
+// add_action( 'init', 'altslogo_create_block_alternative_site_logo_block_init' );
+require_once ALTSLOGO_PATH . '/src/block/index.php';
 
-require ALTSLOGO_PATH . '/inc/class-altslogo-config.php';
-$altslogo_config = new Altslogo_Config();
+// require ALTSLOGO_PATH . '/inc/class-altslogo-config.php';
+// $altslogo_config = new Altslogo_Config();
