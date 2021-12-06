@@ -14,6 +14,9 @@
 		"color": {
 			"text": false,
 			"background": true
+		},
+		"spacing": {
+			"padding": true
 		}
 	},
 	"textdomain": "altslogo"

@@ -179,13 +179,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /*! ModuleConcatenation bailout: Module is not an ECMAScript module */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"$schema\\\":\\\"https://schemas.wp.org/trunk/block.json\\\",\\\"apiVersion\\\":2,\\\"name\\\":\\\"alternative-site-logo/alternative-site-logo\\\",\\\"version\\\":\\\"0.1.0\\\",\\\"title\\\":\\\"Alternative Site Logo\\\",\\\"category\\\":\\\"widgets\\\",\\\"icon\\\":\\\"smiley\\\",\\\"description\\\":\\\"Example block written with ESNext standard and JSX support – build step required.\\\",\\\"keywords\\\":[\\\"logo\\\"],\\\"supports\\\":{\\\"anchor\\\":true,\\\"html\\\":false,\\\"color\\\":{\\\"text\\\":false,\\\"background\\\":true}},\\\"textdomain\\\":\\\"altslogo\\\"}\");\n\n//# sourceURL=webpack:///./src/block/block.json?");
+eval("module.exports = JSON.parse(\"{\\\"$schema\\\":\\\"https://schemas.wp.org/trunk/block.json\\\",\\\"apiVersion\\\":2,\\\"name\\\":\\\"alternative-site-logo/alternative-site-logo\\\",\\\"version\\\":\\\"0.1.0\\\",\\\"title\\\":\\\"Alternative Site Logo\\\",\\\"category\\\":\\\"widgets\\\",\\\"icon\\\":\\\"smiley\\\",\\\"description\\\":\\\"Example block written with ESNext standard and JSX support – build step required.\\\",\\\"keywords\\\":[\\\"logo\\\"],\\\"supports\\\":{\\\"anchor\\\":true,\\\"html\\\":false,\\\"color\\\":{\\\"text\\\":false,\\\"background\\\":true},\\\"spacing\\\":{\\\"margin\\\":true,\\\"padding\\\":true}},\\\"textdomain\\\":\\\"altslogo\\\"}\");\n\n//# sourceURL=webpack:///./src/block/block.json?");
 
 /***/ }),
 
 /***/ "./src/block/index.js":
 /*!****************************************!*\
-  !*** ./src/block/index.js + 3 modules ***!
+  !*** ./src/block/index.js + 2 modules ***!
   \****************************************/
 /*! no exports provided */
 /*! ModuleConcatenation bailout: Cannot concat with ./src/block/style.scss */
@@ -193,11 +193,10 @@ eval("module.exports = JSON.parse(\"{\\\"$schema\\\":\\\"https://schemas.wp.org/
 /*! ModuleConcatenation bailout: Cannot concat with external ["wp","blockEditor"] (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with external ["wp","blocks"] (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with external ["wp","element"] (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with external ["wp","i18n"] (<- Module is not an ECMAScript module) */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("// ESM COMPAT FLAG\n__webpack_require__.r(__webpack_exports__);\n\n// EXTERNAL MODULE: external [\"wp\",\"blocks\"]\nvar external_wp_blocks_ = __webpack_require__(\"@wordpress/blocks\");\n\n// EXTERNAL MODULE: ./src/block/block.json\nvar block = __webpack_require__(\"./src/block/block.json\");\n\n// EXTERNAL MODULE: external [\"wp\",\"element\"]\nvar external_wp_element_ = __webpack_require__(\"@wordpress/element\");\n\n// EXTERNAL MODULE: external [\"wp\",\"i18n\"]\nvar external_wp_i18n_ = __webpack_require__(\"@wordpress/i18n\");\n\n// EXTERNAL MODULE: external [\"wp\",\"blockEditor\"]\nvar external_wp_blockEditor_ = __webpack_require__(\"@wordpress/block-editor\");\n\n// CONCATENATED MODULE: ./src/block/editor.scss\n// extracted by mini-css-extract-plugin\n\n// CONCATENATED MODULE: ./src/block/edit.js\n\n\n/**\n * Retrieves the translation of text.\n *\n * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/\n */\n\n/**\n * React hook that is used to mark the block wrapper element.\n * It provides all the necessary props like the class name.\n *\n * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps\n */\n\n\n/**\n * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.\n * Those files can contain any CSS code that gets applied to the editor.\n *\n * @see https://www.npmjs.com/package/@wordpress/scripts#using-css\n */\n\n\n/**\n * The edit function describes the structure of your block in the context of the\n * editor. This represents what the editor will render when the block is used.\n *\n * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#edit\n *\n * @return {WPElement} Element to render.\n */\n\nfunction Edit() {\n  return Object(external_wp_element_[\"createElement\"])(\"p\", Object(external_wp_blockEditor_[\"useBlockProps\"])(), Object(external_wp_i18n_[\"__\"])('Alternative Site Logo – hello from the editor!', 'alternative-site-logo'));\n}\n// CONCATENATED MODULE: ./src/block/save.js\n\n\n/**\n * Retrieves the translation of text.\n *\n * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/\n */\n\n/**\n * React hook that is used to mark the block wrapper element.\n * It provides all the necessary props like the class name.\n *\n * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps\n */\n\n\n/**\n * The save function defines the way in which the different attributes should\n * be combined into the final markup, which is then serialized by the block\n * editor into `post_content`.\n *\n * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#save\n *\n * @return {WPElement} Element to render.\n */\n\nfunction save() {\n  return Object(external_wp_element_[\"createElement\"])(\"p\", external_wp_blockEditor_[\"useBlockProps\"].save(), Object(external_wp_i18n_[\"__\"])('Alternative Site Logo – hello from the saved content!', 'alternative-site-logo'));\n}\n// EXTERNAL MODULE: ./src/block/style.scss\nvar style = __webpack_require__(\"./src/block/style.scss\");\n\n// CONCATENATED MODULE: ./src/block/index.js\n/**\n * WordPress dependencies\n */\n\n/**\n * Internal dependencies\n */\n\n\n\n\n\nObject(external_wp_blocks_[\"registerBlockType\"])(block.name, { ...block,\n  //title: metadata.title,\n  edit: Edit,\n  save: save\n});\n\n//# sourceURL=webpack:///./src/block/index.js_+_3_modules?");
+eval("// ESM COMPAT FLAG\n__webpack_require__.r(__webpack_exports__);\n\n// EXTERNAL MODULE: external [\"wp\",\"blocks\"]\nvar external_wp_blocks_ = __webpack_require__(\"@wordpress/blocks\");\n\n// EXTERNAL MODULE: ./src/block/block.json\nvar block = __webpack_require__(\"./src/block/block.json\");\n\n// EXTERNAL MODULE: external [\"wp\",\"element\"]\nvar external_wp_element_ = __webpack_require__(\"@wordpress/element\");\n\n// EXTERNAL MODULE: external [\"wp\",\"blockEditor\"]\nvar external_wp_blockEditor_ = __webpack_require__(\"@wordpress/block-editor\");\n\n// EXTERNAL MODULE: external [\"wp\",\"components\"]\nvar external_wp_components_ = __webpack_require__(\"@wordpress/components\");\n\n// CONCATENATED MODULE: ./src/block/edit.js\n\n//import { __ } from '@wordpress/i18n';\n //import './editor.scss';\n// renderメソッドのインポート\n\n // Componentのインポート\n\n // stateの初期値設定\n// const [rowSvg, setText] = useState('初期値');\n// const [outputSVG, setOutputSVG] = useState();\n\nfunction edit() {\n  return (// <p { ...useBlockProps() }>\n    // \t{ __(\n    // \t\t'Alternative Site Logo – hello from the editor!',\n    // \t\t'alternative-site-logo'\n    // \t) }\n    // </p>\n    Object(external_wp_element_[\"createElement\"])(\"div\", Object(external_wp_blockEditor_[\"useBlockProps\"])())\n  );\n}\n// CONCATENATED MODULE: ./src/block/save.js\n\n//import { __ } from '@wordpress/i18n';\n\nfunction save() {\n  return (// <p { ...useBlockProps.save() }>\n    // \t{ __(\n    // \t\t'Alternative Site Logo – hello from the saved content!',\n    // \t\t'alternative-site-logo'\n    // \t) }\n    // </p>\n    Object(external_wp_element_[\"createElement\"])(\"div\", external_wp_blockEditor_[\"useBlockProps\"].save())\n  );\n}\n// EXTERNAL MODULE: ./src/block/style.scss\nvar style = __webpack_require__(\"./src/block/style.scss\");\n\n// CONCATENATED MODULE: ./src/block/index.js\n/**\n * WordPress dependencies\n */\n\n/**\n * Internal dependencies\n */\n\n\n\n\n\nObject(external_wp_blocks_[\"registerBlockType\"])(block.name, { ...block,\n  edit: edit,\n  save: save\n});\n\n//# sourceURL=webpack:///./src/block/index.js_+_2_modules?");
 
 /***/ }),
 
@@ -225,6 +224,18 @@ eval("(function() { module.exports = window[\"wp\"][\"blocks\"]; }());\n\n//# so
 
 /***/ }),
 
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/*! no static exports found */
+/*! ModuleConcatenation bailout: Module is not an ECMAScript module */
+/***/ (function(module, exports) {
+
+eval("(function() { module.exports = window[\"wp\"][\"components\"]; }());\n\n//# sourceURL=webpack:///external_%5B%22wp%22,%22components%22%5D?");
+
+/***/ }),
+
 /***/ "@wordpress/element":
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
@@ -234,18 +245,6 @@ eval("(function() { module.exports = window[\"wp\"][\"blocks\"]; }());\n\n//# so
 /***/ (function(module, exports) {
 
 eval("(function() { module.exports = window[\"wp\"][\"element\"]; }());\n\n//# sourceURL=webpack:///external_%5B%22wp%22,%22element%22%5D?");
-
-/***/ }),
-
-/***/ "@wordpress/i18n":
-/*!******************************!*\
-  !*** external ["wp","i18n"] ***!
-  \******************************/
-/*! no static exports found */
-/*! ModuleConcatenation bailout: Module is not an ECMAScript module */
-/***/ (function(module, exports) {
-
-eval("(function() { module.exports = window[\"wp\"][\"i18n\"]; }());\n\n//# sourceURL=webpack:///external_%5B%22wp%22,%22i18n%22%5D?");
 
 /***/ })
 
