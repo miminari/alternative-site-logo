@@ -21,17 +21,6 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'ALTSLOGO_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 define( 'ALTSLOGO_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/writing-your-first-block-type/
- */
-// function altslogo_create_block_alternative_site_logo_block_init() {
-// 	register_block_type( __DIR__ );
-// }
-// add_action( 'init', 'altslogo_create_block_alternative_site_logo_block_init' );
 require_once ALTSLOGO_PATH . '/src/block/index.php';
 
 // require ALTSLOGO_PATH . '/inc/class-altslogo-config.php';

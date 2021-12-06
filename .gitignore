@@ -14,6 +14,7 @@ build/Release
 # Dependency directories
 node_modules/
 vendor/
+artifacts/
 
 # Optional npm cache directory
 .npm
@@ -26,3 +27,4 @@ vendor/
 
 # dotenv environment variables file
 .env
+.wp-env.override.json

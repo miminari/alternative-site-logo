@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alternative Site Logo should insert by name 1`] = `
+"<!-- wp:alternative-site-logo/alternative-site-logo -->
+<div class=\\"wp-block-alternative-site-logo-alternative-site-logo\\"></div>
+<!-- /wp:alternative-site-logo/alternative-site-logo -->"
+`;

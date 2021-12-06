@@ -4,7 +4,7 @@
 	"name": "alternative-site-logo/alternative-site-logo",
 	"version": "0.1.0",
 	"title": "Alternative Site Logo",
-	"category": "widgets",
+	"category": "design",
 	"icon": "smiley",
 	"description": "Example block written with ESNext standard and JSX support – build step required.",
 	"keywords": [ "logo" ],
@@ -19,5 +19,8 @@
 			"padding": true
 		}
 	},
-	"textdomain": "altslogo"
+	"textdomain": "altslogo",
+	"editorScript": "file:./../../build/block/index.js",
+	"editorStyle": "file:./../../build/block/index.css",
+	"style": "file:./../../build/block/style-index.css"
 }
