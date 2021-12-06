@@ -1,0 +1,12 @@
+{
+    "core": "WordPress/WordPress#master",
+    "plugins": [
+        "."
+	],
+    "port": 3333,
+    "env": {
+        "tests": {
+            "port": 3334
+        }
+    }
+}

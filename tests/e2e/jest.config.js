@@ -4,6 +4,8 @@ const jestE2EConfig = {
 	...config,
 	setupFilesAfterEnv: [
 		'<rootDir>/config/bootstrap.js',
+		'@wordpress/jest-console',
+		'@wordpress/jest-puppeteer-axe',
 	],
 };
 
