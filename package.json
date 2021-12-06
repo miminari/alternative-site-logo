@@ -11,6 +11,7 @@
 		"build:admin": "npx webpack --config webpack.config.admin.js",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
+		"lint:css-fix": "wp-scripts lint-style --fix",
 		"lint:js": "wp-scripts lint-js",
 		"start": "wp-scripts start",
 		"packages-update": "wp-scripts packages-update",

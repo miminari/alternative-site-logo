@@ -38,7 +38,7 @@ if ( ! class_exists( 'Altslogo_Config' ) ) {
 		 * オプションページのコンテンツ
 		 */
 		public function add_root_dom() {
-			echo '<div id="altslogo_admin"></div>';
+			echo '<div id="altslogo-admin"></div>';
 		}
 
 		/**
