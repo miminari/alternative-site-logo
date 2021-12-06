@@ -27,4 +27,4 @@ artifacts/
 
 # dotenv environment variables file
 .env
-.wp-env.override.js
+.wp-env.override.json
