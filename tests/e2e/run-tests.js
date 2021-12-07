@@ -1,8 +1,8 @@
-const { execSync } = require( 'child_process' );
+const { execSync } = require('child_process');
 
 // Run the tests, passing additional arguments through to the test script.
 execSync(
 	'wp-scripts test-e2e --config tests/e2e/jest.config.js --puppeteer-interactive' +
-		process.argv.slice( 2 ).join( ' ' ),
+		process.argv.slice(2).join(' '),
 	{ stdio: 'inherit' }
 );

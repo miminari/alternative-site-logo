@@ -25,3 +25,19 @@ require_once ALTSLOGO_PATH . '/src/block/index.php';
 
 // require ALTSLOGO_PATH . '/inc/class-altslogo-config.php';
 // $altslogo_config = new Altslogo_Config();
+
+/**
+ * Altslog Allow SVGS
+ *
+ * @param Array $mimes mimes.
+ * @return 
+ */
+function altslogo_allow_svgs( $mimes ) {
+	// allow SVG file upload.
+	$mimes['svg']  = 'image/svg+xml';
+	$mimes['svgz'] = 'image/svg+xml';
+	return $mimes;
+}
+
+add_filter( 'upload_mimes', 'altslogo_allow_svgs' );
+add_filter( 'mime_types', 'altslogo_allow_svgs' );
