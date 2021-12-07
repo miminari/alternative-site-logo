@@ -92,6 +92,7 @@ const Admin = () => {
 					value={rowSvg}
 					onChange={(value) => setText(value)}
 				/>
+
 			</div>
 			<Button isPrimary onClick={onClick}>
 				設定を保存
