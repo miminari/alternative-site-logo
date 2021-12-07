@@ -5,10 +5,7 @@ import './editor.scss';
 // renderメソッドのインポート
 import { render, useState, useEffect } from '@wordpress/element';
 // Componentのインポート
-import {
-	TextControl,
-	Button
-} from '@wordpress/components';
+import { TextControl, Button } from '@wordpress/components';
 
 // stateの初期値設定
 // const [rowSvg, setText] = useState('初期値');
