@@ -11,7 +11,7 @@ import save from './save';
 
 import './style.scss';
 
-registerBlockType( 'alternative-site-logo/alternative-site-logo', {
+registerBlockType('alternative-site-logo/alternative-site-logo', {
 	edit,
 	save,
-} );
+});

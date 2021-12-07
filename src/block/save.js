@@ -9,8 +9,6 @@ export default function save() {
 		// 		'alternative-site-logo'
 		// 	) }
 		// </p>
-		<div { ...useBlockProps.save() }>
-			
-		</div>
+		<div {...useBlockProps.save()}></div>
 	);
 }
