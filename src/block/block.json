@@ -25,6 +25,9 @@
 		},
 		"id": {
 			"type": "number"
+		},
+		"svgTag": {
+			"type": "string"
 		}
 	},
 	"textdomain": "altslogo",

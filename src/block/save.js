@@ -1,14 +1,15 @@
 //import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
+import { RawHTML } from '@wordpress/element';
 
 export default function save({ attributes }) {
-	const { url } = attributes;
-	if (!url) {
+	const { svgTag } = attributes;
+	if (!svgTag) {
 		return null;
 	}
 	return (
 		<div {...useBlockProps.save()}>
-			<img src={url} alt="" />
+			<RawHTML>{ svgTag }</RawHTML>
 		</div>
 	);
 }
