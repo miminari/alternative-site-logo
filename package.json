@@ -31,6 +31,8 @@
 		"@wordpress/jest-puppeteer-axe": "^3.1.1",
 		"@wordpress/scripts": "^17.1.0",
 		"dompurify": "^2.3.4",
-		"prettier": "^2.5.1"
+		"dotenv": "^10.0.0",
+		"prettier": "^2.5.1",
+		"uuid": "^8.3.2"
 	}
 }
