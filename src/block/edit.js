@@ -1,4 +1,4 @@
-import { useBlockProps, MediaPlaceholder } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import { FormFileUpload, SandBox } from '@wordpress/components';
 
 import DOMPurify from 'dompurify';
@@ -6,39 +6,27 @@ import DOMPurify from 'dompurify';
 import './editor.scss';
 
 export default function Edit({ setAttributes, attributes }) {
-	const { url, svgTag } = attributes;
+	const { svgTag } = attributes;
 	return (
 		<div {...useBlockProps()}>
-			{ url || svgTag ? (
-				// <img src={url} alt="" />
-				<SandBox html={ svgTag } />
+			{svgTag ? (
+				<SandBox html={svgTag} />
 			) : (
-				// <MediaPlaceholder
-				// 	onSelect={(el) => {
-				// 		setAttributes({ url: el.url });
-				// 	}}
-				// 	allowedTypes={['image/svg+xml']}
-				// />
 				<FormFileUpload
 					accept="image/svg+xml"
 					onChange={(event) => {
 						if (event.target.files && event.target.files[0]) {
 							const file = event.target.files[0];
-							const reader = new FileReader;
-							reader.onload = (event) => {
-								console.log(event)
-								console.log(event.target.result)
-								//setValue(event.target.result)
-								const cleanSvg = DOMPurify.sanitize(event.target.result);
-								console.log( cleanSvg );
-								setAttributes({ svgTag: cleanSvg })
-							}
-							// reader.readAsDataURL(file)
-							reader.readAsText(file)
+							const reader = new window.FileReader();
+							reader.onload = (e) => {
+								// row SVGをサニタイズする
+								const cleanSvg = DOMPurify.sanitize(e.target.result);
+								setAttributes({ svgTag: cleanSvg });
+							};
+							// 取得したファイルから中身を読み出す
+							reader.readAsText(file);
 						}
-						console.log(event)
-					}
-					}
+					}}
 				>
 					Upload
 				</FormFileUpload>

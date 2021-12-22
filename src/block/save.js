@@ -9,7 +9,7 @@ export default function save({ attributes }) {
 	}
 	return (
 		<div {...useBlockProps.save()}>
-			<RawHTML>{ svgTag }</RawHTML>
+			<RawHTML>{svgTag}</RawHTML>
 		</div>
 	);
 }
