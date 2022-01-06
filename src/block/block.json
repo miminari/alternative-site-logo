@@ -19,6 +19,17 @@
 			"padding": true
 		}
 	},
+	"attributes": {
+		"url": {
+			"type": "string"
+		},
+		"id": {
+			"type": "number"
+		},
+		"svgTag": {
+			"type": "string"
+		}
+	},
 	"textdomain": "altslogo",
 	"editorScript": "file:./../../build/block/index.js",
 	"editorStyle": "file:./../../build/block/index.css",

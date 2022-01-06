@@ -5,6 +5,11 @@ module.exports = {
 	],
 	//plugins: [ '@typescript-eslint' ],
 	//parser: '@typescript-eslint/parser',
+	// parser: '@babel/eslint-parser',
+	parserOptions: {
+		sourceType: 'module',
+		requireConfigFile: false,
+	},
 	rules: {
 		'import/no-extraneous-dependencies': 'off',
 		'import/no-unresolved': 'off',

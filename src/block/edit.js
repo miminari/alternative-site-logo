@@ -1,30 +1,37 @@
-//import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
+import { FormFileUpload, SandBox } from '@wordpress/components';
+
+import DOMPurify from 'dompurify';
+
 import './editor.scss';
 
-// renderメソッドのインポート
-import { render, useState, useEffect } from '@wordpress/element';
-// Componentのインポート
-import { TextControl, Button } from '@wordpress/components';
-
-// stateの初期値設定
-// const [rowSvg, setText] = useState('初期値');
-// const [outputSVG, setOutputSVG] = useState();
-
-export default function edit() {
+export default function Edit({ setAttributes, attributes }) {
+	const { svgTag } = attributes;
 	return (
-		// <p { ...useBlockProps() }>
-		// 	{ __(
-		// 		'Alternative Site Logo – hello from the editor!',
-		// 		'alternative-site-logo'
-		// 	) }
-		// </p>
 		<div {...useBlockProps()}>
-			{/* <TextControl
-				label="Logo SVG Tags"
-				value={rowSvg}
-				onChange={(value) => setText(value)}
-			/> */}
+			{svgTag ? (
+				<SandBox html={svgTag} />
+			) : (
+				<FormFileUpload
+					accept="image/svg+xml"
+					onChange={(event) => {
+						if (event.target.files && event.target.files[0]) {
+							const file = event.target.files[0];
+							const reader = new window.FileReader();
+							reader.onload = (e) => {
+								// row SVGをサニタイズする
+								const cleanSvg = DOMPurify.sanitize(e.target.result);
+								console.log(cleanSvg);
+								setAttributes({ svgTag: cleanSvg });
+							};
+							// 取得したファイルから中身を読み出す
+							reader.readAsText(file);
+						}
+					}}
+				>
+					Upload
+				</FormFileUpload>
+			)}
 		</div>
 	);
 }

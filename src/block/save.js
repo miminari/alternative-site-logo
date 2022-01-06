@@ -1,14 +1,15 @@
 //import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
+import { RawHTML } from '@wordpress/element';
 
-export default function save() {
+export default function save({ attributes }) {
+	const { svgTag } = attributes;
+	if (!svgTag) {
+		return null;
+	}
 	return (
-		// <p { ...useBlockProps.save() }>
-		// 	{ __(
-		// 		'Alternative Site Logo – hello from the saved content!',
-		// 		'alternative-site-logo'
-		// 	) }
-		// </p>
-		<div {...useBlockProps.save()}></div>
+		<div {...useBlockProps.save()}>
+			<RawHTML>{svgTag}</RawHTML>
+		</div>
 	);
 }

@@ -27,4 +27,6 @@ artifacts/
 
 # dotenv environment variables file
 .env
+
 .wp-env.override.json
+.DS_Store
