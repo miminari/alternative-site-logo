@@ -20,8 +20,7 @@ export async function changeSiteLang(lang) {
 	);
 	await page.select('#WPLANG', lang);
 	await Promise.all([
-		page.click('#submit'),
-		//page.waitForNavigaion( { waitUntil: 'networkidle0' } ),
+		page.click('#submit')
 	]);
 
 	await switchUserToTest();

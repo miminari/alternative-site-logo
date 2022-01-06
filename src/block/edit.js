@@ -21,6 +21,7 @@ export default function Edit({ setAttributes, attributes }) {
 							reader.onload = (e) => {
 								// row SVGをサニタイズする
 								const cleanSvg = DOMPurify.sanitize(e.target.result);
+								console.log(cleanSvg);
 								setAttributes({ svgTag: cleanSvg });
 							};
 							// 取得したファイルから中身を読み出す
