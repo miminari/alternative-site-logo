@@ -50,7 +50,6 @@ describe('Alternative Site Logo', () => {
 			'invalid.svg'
 		);
 		const regex = new RegExp(
-			//`<!-- wp:alternative-site-logo\\/alternative-site-logo [^]+ -->\\s*<div class="wp-block-alternative-site-logo-alternative-site-logo">\\s*<svg aria-describedby="[^"]+" role="img" [^]+>[^]+<title id="[^"]+">[^]+</title>[^]+</svg>\\s*</div>\\s*<!-- /wp:alternative-site-logo\\/alternative-site-logo -->`
 			`<!-- wp:alternative-site-logo\\/alternative-site-logo [^]+ -->\\s*<div class="wp-block-alternative-site-logo-alternative-site-logo">\\s*<svg aria-describedby="[^"]+" role="img" [^]+>[^]*<title id="[^"]+"[^>]+>[^]+<\\/title>[^]*<\\/svg>\\s*<\\/div>\\s*<!-- /wp:alternative-site-logo\\/alternative-site-logo -->`
 		);
 		expect(await getEditedPostContent()).toMatch(regex);

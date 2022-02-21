@@ -3,7 +3,6 @@ import { FormFileUpload, SandBox } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 
 import DOMPurify from 'dompurify';
-//import { ReactSVG } from 'react-svg';
 
 import './editor.scss';
 
