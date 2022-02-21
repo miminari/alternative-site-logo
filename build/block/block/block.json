@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "alternative-site-logo/alternative-site-logo",
+	"version": "0.1.0",
+	"title": "Alternative Site Logo",
+	"category": "design",
+	"icon": "smiley",
+	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"keywords": [ "logo" ],
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"color": {
+			"text": false,
+			"background": true
+		},
+		"spacing": {
+			"padding": true
+		}
+	},
+	"attributes": {
+		"url": {
+			"type": "string"
+		},
+		"id": {
+			"type": "number"
+		},
+		"svgTag": {
+			"type": "string"
+		},
+		"logoTitle": {
+			"type": "string"
+		}
+	},
+	"textdomain": "altslogo",
+	"editorScript": "file:./../../build/block/index.js",
+	"editorStyle": "file:./../../build/block/index.css",
+	"style": "file:./../../build/block/style-index.css"
+}

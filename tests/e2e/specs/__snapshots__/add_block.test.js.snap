@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alternative Site Logo can upload svg file 1`] = `
+"<!-- wp:alternative-site-logo/alternative-site-logo {\\"svgTag\\":\\"\\\\u003csvg xmlns=\\\\u0022http://www.w3.org/2000/svg\\\\u0022 viewBox=\\\\u00220 0 10 10\\\\u0022\\\\u003e\\\\n\\\\u003ccircle r=\\\\u00224\\\\u0022 cy=\\\\u00225\\\\u0022 cx=\\\\u00225\\\\u0022\\\\u003e\\\\u003c/circle\\\\u003e\\\\n\\\\u003c/svg\\\\u003e\\\\n\\"} -->
+<div class=\\"wp-block-alternative-site-logo-alternative-site-logo\\"><svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 10 10\\">
+<circle r=\\"4\\" cy=\\"5\\" cx=\\"5\\"></circle>
+</svg>
+</div>
+<!-- /wp:alternative-site-logo/alternative-site-logo -->"
+`;
+
+exports[`Alternative Site Logo should sanitize svg file 1`] = `
+"<!-- wp:alternative-site-logo/alternative-site-logo {\\"svgTag\\":\\"\\\\u003csvg xmlns=\\\\u0022http://www.w3.org/2000/svg\\\\u0022 viewBox=\\\\u00220 0 10 10\\\\u0022\\\\u003e\\\\n  \\\\n\\\\n  \\\\u003ccircle r=\\\\u00224\\\\u0022 cy=\\\\u00225\\\\u0022 cx=\\\\u00225\\\\u0022\\\\u003e\\\\u003c/circle\\\\u003e\\\\n\\\\u003c/svg\\\\u003e\\"} -->
+<div class=\\"wp-block-alternative-site-logo-alternative-site-logo\\"><svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 10 10\\">
+  
+
+  <circle r=\\"4\\" cy=\\"5\\" cx=\\"5\\"></circle>
+</svg></div>
+<!-- /wp:alternative-site-logo/alternative-site-logo -->"
+`;

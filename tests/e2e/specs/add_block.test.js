@@ -22,22 +22,17 @@ async function upload(selector, svg) {
 	return filename;
 }
 
-// async function waitForImage(filename) {
-// 	await page.waitForSelector('.wp-block-alternative-site-logo-alternative-site-logo svg');
-// }
-
 describe('Alternative Site Logo', () => {
 	beforeEach(async () => {
 		await createNewPost();
 	});
 	it('can upload svg file', async () => {
 		await insertBlock('Alternative Site Logo');
-		// const filename = await upload(
 		await upload(
 			`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`,
 			'upload_test_svg.svg'
 		);
-		// await waitForImage( filename );
+		await page.waitForSelector('.wp-block-alternative-site-logo-alternative-site-logo iframe');
 		expect(await getEditedPostContent()).toMatchSnapshot();
 	});
 	it('should sanitize svg file', async () => {
@@ -48,16 +43,15 @@ describe('Alternative Site Logo', () => {
 		);
 		expect(await getEditedPostContent()).toMatchSnapshot();
 	});
-	// it('should insert title tag', async () => {
-	// 	await insertBlock('Alternative Site Logo');
-	// 	await upload(
-	// 		`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`,
-	// 		'invalid.svg'
-	// 	);
-
-	// 	const regex = new RegExp(
-	// 		''
-	// 	);
-	// 	expect( await getEditedPostContent() ).toMatch( regex );
-	// });
+	it('should insert title tag and role attribute', async () => {
+		await insertBlock('Alternative Site Logo');
+		await upload(
+			`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`,
+			'invalid.svg'
+		);
+		const regex = new RegExp(
+			`<!-- wp:alternative-site-logo/alternative-site-logo .* -->\\s*<div class="wp-block-alternative-site-logo-alternative-site-logo">\\s*<svg .* role="img" .* aria-describedby="[^"]+".*>\\s*<title id="[^"]+">.*</title>.*</svg>\\s*</div>\\s*<!-- /wp:alternative-site-logo/alternative-site-logo -->`
+		);
+		expect(await getEditedPostContent()).toMatch(regex);
+	});
 });
