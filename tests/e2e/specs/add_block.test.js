@@ -11,7 +11,7 @@ import { v4 as uuid } from 'uuid';
  */
 import { createNewPost, insertBlock, getEditedPostContent } from '@wordpress/e2e-test-utils';
 
-async function upload(selector,svg) {
+async function upload(selector, svg) {
 	await page.waitForSelector(selector);
 	const inputElement = await page.$(selector);
 	const testImagePath = path.join(__dirname, '..', 'assets', svg);
@@ -22,24 +22,36 @@ async function upload(selector,svg) {
 	return filename;
 }
 
-// async function waitForImage(filename) {
-// 	await page.waitForSelector('.wp-block-alternative-site-logo-alternative-site-logo svg');
-// }
-
 describe('Alternative Site Logo', () => {
 	beforeEach(async () => {
 		await createNewPost();
 	});
 	it('can upload svg file', async () => {
 		await insertBlock('Alternative Site Logo');
-		// const filename = await upload(
-		await upload(`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`, 'upload_test_svg.svg');
-		// await waitForImage( filename );
+		await upload(
+			`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`,
+			'upload_test_svg.svg'
+		);
+		await page.waitForSelector('.wp-block-alternative-site-logo-alternative-site-logo iframe');
 		expect(await getEditedPostContent()).toMatchSnapshot();
 	});
 	it('should sanitize svg file', async () => {
 		await insertBlock('Alternative Site Logo');
-		await upload(`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`, 'invalid.svg');
+		await upload(
+			`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`,
+			'invalid.svg'
+		);
 		expect(await getEditedPostContent()).toMatchSnapshot();
+	});
+	it('should insert title tag and role attribute', async () => {
+		await insertBlock('Alternative Site Logo');
+		await upload(
+			`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`,
+			'invalid.svg'
+		);
+		const regex = new RegExp(
+			`<!-- wp:alternative-site-logo\\/alternative-site-logo [^]+ -->\\s*<div class="wp-block-alternative-site-logo-alternative-site-logo">\\s*<svg aria-describedby="[^"]+" role="img" [^]+>[^]*<title id="[^"]+"[^>]+>[^]+<\\/title>[^]*<\\/svg>\\s*<\\/div>\\s*<!-- /wp:alternative-site-logo\\/alternative-site-logo -->`
+		);
+		expect(await getEditedPostContent()).toMatch(regex);
 	});
 });
