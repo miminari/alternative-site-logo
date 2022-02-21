@@ -1,12 +1,11 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "alternative-site-logo/alternative-site-logo",
-	"version": "0.1.0",
+	"name": "altslogo/altslogo",
+	"version": "0.0.1",
 	"title": "Alternative Site Logo",
 	"category": "design",
-	"icon": "smiley",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"description": "More freedom, more beauty. You can use a SVG file for your site logo.",
 	"keywords": [ "logo" ],
 	"supports": {
 		"anchor": true,
@@ -15,6 +14,8 @@
 			"text": false,
 			"background": true
 		},
+		"align": true,
+		"alignWide": false,
 		"spacing": {
 			"padding": true
 		}

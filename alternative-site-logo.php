@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name:       Alternative Site Logo
- * Description:       Example block written with ESNext standard and JSX support – build step required.
- * Requires at least: 5.8
+ * Description:       More freedom, more beauty. You can use a SVG file for your site logo.
+ * Requires at least: 5.9
  * Requires PHP:      7.0
  * Version:           0.0.1
  * Author:            Photosynthesic
@@ -10,7 +10,7 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       altslogo
  *
- * @package           alternative-site-logo
+ * @package           altslogo
  */
 
 // If this file is called directly, abort.

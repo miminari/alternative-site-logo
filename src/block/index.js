@@ -3,6 +3,8 @@
  */
 import { registerBlockType } from '@wordpress/blocks';
 
+import { default as icon } from './icon';
+
 /**
  * Internal dependencies
  */
@@ -11,7 +13,8 @@ import save from './save';
 
 import './style.scss';
 
-registerBlockType('alternative-site-logo/alternative-site-logo', {
+registerBlockType('altslogo/altslogo', {
+	icon,
 	edit,
 	save,
 });
