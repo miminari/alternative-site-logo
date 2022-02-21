@@ -15,7 +15,6 @@ export default function Edit({ setAttributes, attributes }) {
 		<div {...useBlockProps()}>
 			{svgTag ? (
 				<SandBox html={svgTag} />
-				// {svgTag}
 			) : (
 				<FormFileUpload
 					accept="image/svg+xml"
@@ -26,24 +25,28 @@ export default function Edit({ setAttributes, attributes }) {
 							const reader = new window.FileReader();
 							const parser = new DOMParser();
 							const serialize = new XMLSerializer();
+							const ariaId = 'altslogoTitle';
 							reader.onload = (e) => {
-								// console.log(e.target.result);
 								// row SVGをサニタイズする
 								const cleanSvg = DOMPurify.sanitize(e.target.result);
-								console.log(cleanSvg);
+								// console.log(cleanSvg);
 								// titleTagなどを付与する
 								let parsedSvg = parser.parseFromString(cleanSvg, "image/svg+xml").firstChild;
 								parsedSvg.setAttribute('role','img');
+								parsedSvg.setAttribute('aria-describedby',ariaId);
 								let newTitle = document.createElement("title");
-								let newTitleContent = document.createTextNode(title);
+								newTitle.setAttribute('id',ariaId);
+								const newTitleContent = document.createTextNode(title);
 								newTitle.appendChild(newTitleContent);
 								parsedSvg.appendChild(newTitle);
-								console.log(parsedSvg);
+								// console.log(parsedSvg);
 								// 文字列に戻す
 								const a11ySvg = serialize.serializeToString(parsedSvg);
 								console.log(a11ySvg);
-								
-								setAttributes({ svgTag: a11ySvg });
+								// もう一度サニタイズ
+								const rearrangedSvg = DOMPurify.sanitize(a11ySvg);
+								// console.log(rearrangedSvg);
+								setAttributes({ svgTag: rearrangedSvg });
 							};
 							// 取得したファイルから中身を読み出す
 							reader.readAsText(file);
