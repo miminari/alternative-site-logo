@@ -3,31 +3,13 @@ import { FormFileUpload, SandBox } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 
 import DOMPurify from 'dompurify';
-import { ReactSVG } from 'react-svg';
+//import { ReactSVG } from 'react-svg';
 
 import './editor.scss';
 
 export default function Edit({ setAttributes, attributes }) {
 	const { svgTag, logoTitle } = attributes;
 	const [title, setTitle] = useEntityProp('root', 'site', 'title');
-
-	// const titledSvg = (
-	// 		<SVG xmlns="http://www.w3.org/2000/svg" aria-labelledby="svgLogoTitle" viewBox={viewBox}>
-	// 			{titleTag}
-	// 			{svgContents}
-	// 		</SVG>
-	// )
-
-	// const addTitleTag = (node) => {
-	// 	if (node.name === 'svg') {
-	// 		return (
-	// 			<SVG {...node.attribs} aria-labelledby="svgLogoTitle">
-	// 				<title id="svgLogoTitle">{title}</title>
-	// 				{domToReact(node.children)}
-	// 			</SVG>
-	// 		)
-	// 	}
-	// }
 
 	return (
 		<div {...useBlockProps()}>
@@ -43,30 +25,25 @@ export default function Edit({ setAttributes, attributes }) {
 							console.log(file);
 							const reader = new window.FileReader();
 							const parser = new DOMParser();
+							const serialize = new XMLSerializer();
 							reader.onload = (e) => {
 								// console.log(e.target.result);
 								// row SVGをサニタイズする
 								const cleanSvg = DOMPurify.sanitize(e.target.result);
 								console.log(cleanSvg);
-								// titleTagを付与する
-								const parsedSvg = parser.parseFromString(cleanSvg, "image/svg+xml");
-								// const titledSvg = parse(cleanSvg, {addTitleTag} );
+								// titleTagなどを付与する
+								let parsedSvg = parser.parseFromString(cleanSvg, "image/svg+xml").firstChild;
+								parsedSvg.setAttribute('role','img');
+								let newTitle = document.createElement("title");
+								let newTitleContent = document.createTextNode(title);
+								newTitle.appendChild(newTitleContent);
+								parsedSvg.appendChild(newTitle);
 								console.log(parsedSvg);
-								// const titleTag = `<title id="svgLogoTitle">${ title }</title>`;
-								// const titledSvg = (
-								// 	<ReactSVG
-								// 	beforeInjection={(svg) => {
-								// 		const title = document.createElementNS(
-								// 			'http://www.w3.org/2000/svg',
-								// 			'title'
-								// 		  )
-								// 		  title.innerHTML = 'A title'
-								// 		  svg.prepend(title)
-								// 	}}
-								// 	src={e.target.result}
-								// 	/>
-								// )
-								setAttributes({ svgTag: cleanSvg });
+								// 文字列に戻す
+								const a11ySvg = serialize.serializeToString(parsedSvg);
+								console.log(a11ySvg);
+								
+								setAttributes({ svgTag: a11ySvg });
 							};
 							// 取得したファイルから中身を読み出す
 							reader.readAsText(file);
