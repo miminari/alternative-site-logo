@@ -19,9 +19,7 @@ export async function changeSiteLang(lang) {
 		(element) => element.options[element.selectedIndex].text
 	);
 	await page.select('#WPLANG', lang);
-	await Promise.all([
-		page.click('#submit')
-	]);
+	await Promise.all([page.click('#submit')]);
 
 	await switchUserToTest();
 

@@ -28,6 +28,9 @@
 		},
 		"svgTag": {
 			"type": "string"
+		},
+		"logoTitle": {
+			"type": "string"
 		}
 	},
 	"textdomain": "altslogo",

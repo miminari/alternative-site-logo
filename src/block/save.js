@@ -2,6 +2,8 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import { RawHTML } from '@wordpress/element';
 
+// import parse from 'html-react-parser';
+
 export default function save({ attributes }) {
 	const { svgTag } = attributes;
 	if (!svgTag) {
