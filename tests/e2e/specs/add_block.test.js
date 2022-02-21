@@ -48,4 +48,16 @@ describe('Alternative Site Logo', () => {
 		);
 		expect(await getEditedPostContent()).toMatchSnapshot();
 	});
+	// it('should insert title tag', async () => {
+	// 	await insertBlock('Alternative Site Logo');
+	// 	await upload(
+	// 		`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`,
+	// 		'invalid.svg'
+	// 	);
+
+	// 	const regex = new RegExp(
+	// 		''
+	// 	);
+	// 	expect( await getEditedPostContent() ).toMatch( regex );
+	// });
 });
