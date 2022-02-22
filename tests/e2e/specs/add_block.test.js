@@ -29,16 +29,16 @@ describe('Alternative Site Logo', () => {
 	it('can upload svg file', async () => {
 		await insertBlock('Alternative Site Logo');
 		await upload(
-			`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`,
+			`.wp-block-altslogo-altslogo input[type=file]`,
 			'upload_test_svg.svg'
 		);
-		await page.waitForSelector('.wp-block-alternative-site-logo-alternative-site-logo iframe');
+		await page.waitForSelector('.wp-block-altslogo-altslogo iframe');
 		expect(await getEditedPostContent()).toMatchSnapshot();
 	});
 	it('should sanitize svg file', async () => {
 		await insertBlock('Alternative Site Logo');
 		await upload(
-			`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`,
+			`.wp-block-altslogo-altslogo input[type=file]`,
 			'invalid.svg'
 		);
 		expect(await getEditedPostContent()).toMatchSnapshot();
@@ -46,11 +46,11 @@ describe('Alternative Site Logo', () => {
 	it('should insert title tag and role attribute', async () => {
 		await insertBlock('Alternative Site Logo');
 		await upload(
-			`.wp-block-alternative-site-logo-alternative-site-logo input[type=file]`,
+			`.wp-block-altslogo-altslogo input[type=file]`,
 			'invalid.svg'
 		);
 		const regex = new RegExp(
-			`<!-- wp:alternative-site-logo\\/alternative-site-logo [^]+ -->\\s*<div class="wp-block-alternative-site-logo-alternative-site-logo">\\s*<svg aria-describedby="[^"]+" role="img" [^]+>[^]*<title id="[^"]+"[^>]+>[^]+<\\/title>[^]*<\\/svg>\\s*<\\/div>\\s*<!-- /wp:alternative-site-logo\\/alternative-site-logo -->`
+			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo">\\s*<svg aria-describedby="[^"]+" role="img" [^]+>[^]*<title id="[^"]+"[^>]+>[^]+<\\/title>[^]*<\\/svg>\\s*<\\/div>\\s*<!-- /wp:altslogo\\/altslogo -->`
 		);
 		expect(await getEditedPostContent()).toMatch(regex);
 	});

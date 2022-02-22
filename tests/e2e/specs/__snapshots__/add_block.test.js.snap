@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Alternative Site Logo can upload svg file 1`] = `
-"<!-- wp:alternative-site-logo/alternative-site-logo {\\"svgTag\\":\\"\\\\u003csvg aria-describedby=\\\\u0022altslogoTitle\\\\u0022 role=\\\\u0022img\\\\u0022 viewBox=\\\\u00220 0 10 10\\\\u0022 xmlns=\\\\u0022http://www.w3.org/2000/svg\\\\u0022\\\\u003e\\\\n\\\\u003ccircle cx=\\\\u00225\\\\u0022 cy=\\\\u00225\\\\u0022 r=\\\\u00224\\\\u0022\\\\u003e\\\\u003c/circle\\\\u003e\\\\n\\\\u003ctitle id=\\\\u0022altslogoTitle\\\\u0022 xmlns=\\\\u0022http://www.w3.org/1999/xhtml\\\\u0022\\\\u003ealternative-site-logo\\\\u003c/title\\\\u003e\\\\u003c/svg\\\\u003e\\",\\"logoTitle\\":\\"alternative-site-logo\\"} -->
-<div class=\\"wp-block-alternative-site-logo-alternative-site-logo\\"><svg aria-describedby=\\"altslogoTitle\\" role=\\"img\\" viewBox=\\"0 0 10 10\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+"<!-- wp:altslogo/altslogo {\\"svgTag\\":\\"\\\\u003csvg aria-describedby=\\\\u0022altslogoTitle\\\\u0022 role=\\\\u0022img\\\\u0022 viewBox=\\\\u00220 0 10 10\\\\u0022 xmlns=\\\\u0022http://www.w3.org/2000/svg\\\\u0022\\\\u003e\\\\n\\\\u003ccircle cx=\\\\u00225\\\\u0022 cy=\\\\u00225\\\\u0022 r=\\\\u00224\\\\u0022\\\\u003e\\\\u003c/circle\\\\u003e\\\\n\\\\u003ctitle id=\\\\u0022altslogoTitle\\\\u0022 xmlns=\\\\u0022http://www.w3.org/1999/xhtml\\\\u0022\\\\u003ealternative-site-logo\\\\u003c/title\\\\u003e\\\\u003c/svg\\\\u003e\\",\\"logoTitle\\":\\"alternative-site-logo\\"} -->
+<div class=\\"wp-block-altslogo-altslogo\\"><svg aria-describedby=\\"altslogoTitle\\" role=\\"img\\" viewBox=\\"0 0 10 10\\" xmlns=\\"http://www.w3.org/2000/svg\\">
 <circle cx=\\"5\\" cy=\\"5\\" r=\\"4\\"></circle>
 <title id=\\"altslogoTitle\\" xmlns=\\"http://www.w3.org/1999/xhtml\\">alternative-site-logo</title></svg></div>
-<!-- /wp:alternative-site-logo/alternative-site-logo -->"
+<!-- /wp:altslogo/altslogo -->"
 `;
 
 exports[`Alternative Site Logo should sanitize svg file 1`] = `
-"<!-- wp:alternative-site-logo/alternative-site-logo {\\"svgTag\\":\\"\\\\u003csvg aria-describedby=\\\\u0022altslogoTitle\\\\u0022 role=\\\\u0022img\\\\u0022 viewBox=\\\\u00220 0 10 10\\\\u0022 xmlns=\\\\u0022http://www.w3.org/2000/svg\\\\u0022\\\\u003e\\\\n  \\\\n\\\\n  \\\\u003ccircle cx=\\\\u00225\\\\u0022 cy=\\\\u00225\\\\u0022 r=\\\\u00224\\\\u0022\\\\u003e\\\\u003c/circle\\\\u003e\\\\n\\\\u003ctitle id=\\\\u0022altslogoTitle\\\\u0022 xmlns=\\\\u0022http://www.w3.org/1999/xhtml\\\\u0022\\\\u003ealternative-site-logo\\\\u003c/title\\\\u003e\\\\u003c/svg\\\\u003e\\",\\"logoTitle\\":\\"alternative-site-logo\\"} -->
-<div class=\\"wp-block-alternative-site-logo-alternative-site-logo\\"><svg aria-describedby=\\"altslogoTitle\\" role=\\"img\\" viewBox=\\"0 0 10 10\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+"<!-- wp:altslogo/altslogo {\\"svgTag\\":\\"\\\\u003csvg aria-describedby=\\\\u0022altslogoTitle\\\\u0022 role=\\\\u0022img\\\\u0022 viewBox=\\\\u00220 0 10 10\\\\u0022 xmlns=\\\\u0022http://www.w3.org/2000/svg\\\\u0022\\\\u003e\\\\n  \\\\n\\\\n  \\\\u003ccircle cx=\\\\u00225\\\\u0022 cy=\\\\u00225\\\\u0022 r=\\\\u00224\\\\u0022\\\\u003e\\\\u003c/circle\\\\u003e\\\\n\\\\u003ctitle id=\\\\u0022altslogoTitle\\\\u0022 xmlns=\\\\u0022http://www.w3.org/1999/xhtml\\\\u0022\\\\u003ealternative-site-logo\\\\u003c/title\\\\u003e\\\\u003c/svg\\\\u003e\\",\\"logoTitle\\":\\"alternative-site-logo\\"} -->
+<div class=\\"wp-block-altslogo-altslogo\\"><svg aria-describedby=\\"altslogoTitle\\" role=\\"img\\" viewBox=\\"0 0 10 10\\" xmlns=\\"http://www.w3.org/2000/svg\\">
   
 
   <circle cx=\\"5\\" cy=\\"5\\" r=\\"4\\"></circle>
 <title id=\\"altslogoTitle\\" xmlns=\\"http://www.w3.org/1999/xhtml\\">alternative-site-logo</title></svg></div>
-<!-- /wp:alternative-site-logo/alternative-site-logo -->"
+<!-- /wp:altslogo/altslogo -->"
 `;
