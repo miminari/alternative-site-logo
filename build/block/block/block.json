@@ -32,6 +32,9 @@
 		},
 		"logoTitle": {
 			"type": "string"
+		},
+		"width": {
+			"type": "number"
 		}
 	},
 	"textdomain": "altslogo",
