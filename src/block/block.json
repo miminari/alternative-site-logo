@@ -21,8 +21,11 @@
 		}
 	},
 	"attributes": {
-		"url": {
-			"type": "string"
+		"siteUrl": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "href"
 		},
 		"id": {
 			"type": "number"
