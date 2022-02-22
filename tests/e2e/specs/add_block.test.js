@@ -46,7 +46,7 @@ describe('Alternative Site Logo', () => {
 		await insertBlock('Alternative Site Logo');
 		await upload(`.wp-block-altslogo-altslogo input[type=file]`, 'upload_test_svg.svg');
 		const regex = new RegExp(
-			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo">\\s*<svg aria-describedby="[^"]+" role="img" [^]+>[^]*<title id="[^"]+"[^>]+>[^]+<\\/title>[^]*<\\/svg>\\s*<\\/div>\\s*<!-- /wp:altslogo\\/altslogo -->`
+			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo">\\s*<a [^>]*>\\s*<svg aria-describedby="[^"]+" role="img" [^]+>[^]*<title id="[^"]+"[^>]+>[^]+<\\/title>[^]*<\\/svg>\\s*<\\/a>\\s*<\\/div>\\s*<!-- /wp:altslogo\\/altslogo -->`
 		);
 		expect(await getEditedPostContent()).toMatch(regex);
 	});
@@ -62,7 +62,20 @@ describe('Alternative Site Logo', () => {
 		await page.keyboard.type('120');
 		await page.keyboard.press('Escape');
 		const regex = new RegExp(
-			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo">\\s*<svg [^]* width="120" height="75"[^>]*>[^]*<\\/svg>\\s*<\\/div>\\s*<!-- /wp:altslogo\\/altslogo -->`
+			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo">\\s*<a [^>]*>\\s*<svg [^]* width="120" height="75"[^>]*>[^]*<\\/svg>\\s*<\\/a>\\s*<\\/div>\\s*<!-- /wp:altslogo\\/altslogo -->`
+		);
+		expect(await getEditedPostContent()).toMatch(regex);
+	});
+	it('should link to home', async () => {
+		await insertBlock('Alternative Site Logo');
+		await upload(`.wp-block-altslogo-altslogo input[type=file]`, 'upload_test_svg.svg');
+		await page.waitForSelector('.wp-block-altslogo-altslogo iframe');
+		// 現在のURLを取得
+		const currentUrl = page.url();
+		const currentUrlArr = currentUrl.split('/');
+		const currentHome = currentUrlArr[0] + '//' + currentUrlArr[2];
+		const regex = new RegExp(
+			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo">\\s*<a href="${currentHome}"[^>]*>\\s*<svg [^>]*>[^]*<\\/svg>\\s*<\\/a>\\s*<\\/div>\\s*<!-- /wp:altslogo\\/altslogo -->`
 		);
 		expect(await getEditedPostContent()).toMatch(regex);
 	});

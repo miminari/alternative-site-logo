@@ -9,8 +9,9 @@ import DOMPurify from 'dompurify';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { FormFileUpload, PanelBody, RangeControl, SandBox } from '@wordpress/components';
-import { useEntityProp } from '@wordpress/core-data';
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
+import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 
 /**
  * Internal dependencies
@@ -20,8 +21,15 @@ import { useEffect, useRef } from '@wordpress/element';
 import './editor.scss';
 
 export default function Edit({ setAttributes, attributes }) {
-	const { svgTag, logoTitle, width } = attributes;
+	const { svgTag, logoTitle, width, siteUrl } = attributes;
 	const [title, setTitle] = useEntityProp('root', 'site', 'title');
+	const { url } = useSelect((select) => {
+		const { getEntityRecord } = select(coreStore);
+		const siteData = getEntityRecord('root', '__unstableBase');
+		return {
+			url: siteData?.url,
+		};
+	}, []);
 	// const ref = useRef();
 
 	// const clientWidth = useClientWidth(ref, [align]);
@@ -74,7 +82,9 @@ export default function Edit({ setAttributes, attributes }) {
 			</InspectorControls>
 			<div {...useBlockProps()}>
 				{svgTag ? (
-					<SandBox html={svgTag} />
+					<a href={siteUrl}>
+						<SandBox html={svgTag} />
+					</a>
 				) : (
 					<FormFileUpload
 						accept="image/svg+xml"
@@ -107,6 +117,8 @@ export default function Edit({ setAttributes, attributes }) {
 									const rearrangedSvg = DOMPurify.sanitize(a11ySvg);
 									// console.log(rearrangedSvg);
 									setAttributes({ svgTag: rearrangedSvg });
+									// siteUrlを設定する
+									setAttributes({ siteUrl: url });
 								};
 								// 取得したファイルから中身を読み出す
 								reader.readAsText(file);

@@ -5,13 +5,15 @@ import { RawHTML } from '@wordpress/element';
 // import parse from 'html-react-parser';
 
 export default function save({ attributes }) {
-	const { svgTag } = attributes;
+	const { svgTag, siteUrl } = attributes;
 	if (!svgTag) {
 		return null;
 	}
 	return (
 		<div {...useBlockProps.save()}>
-			<RawHTML>{svgTag}</RawHTML>
+			<a href={siteUrl}>
+				<RawHTML>{svgTag}</RawHTML>
+			</a>
 		</div>
 	);
 }
