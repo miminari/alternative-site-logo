@@ -40,6 +40,10 @@
 			"type": "number"
 		}
 	},
+	"styles": [
+		{ "name": "default", "label": "Default", "isDefault": true },
+		{ "name": "animation-dash", "label": "Animation Dash" }
+	],
 	"textdomain": "altslogo",
 	"editorScript": "file:./../../build/block/index.js",
 	"editorStyle": "file:./../../build/block/index.css",

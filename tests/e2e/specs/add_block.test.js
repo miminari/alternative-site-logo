@@ -79,17 +79,15 @@ describe('Alternative Site Logo', () => {
 		);
 		expect(await getEditedPostContent()).toMatch(regex);
 	});
-	it('can change the style to animation01', async () => {
+	it('can change the style to Animation Dash', async () => {
 		await insertBlock('Alternative Site Logo');
 		await upload(`.wp-block-altslogo-altslogo input[type=file]`, 'upload_test_svg_horizontal.svg');
 		await page.waitForSelector('.wp-block-altslogo-altslogo iframe');
 		await openDocumentSettingsSidebar();
-		const animation01Button = await page.waitForXPath(
-			'//*[@role="menuitem"][contains(., "Animation01")]'
-		);
-		await animation01Button.click();
+		await page.waitForSelector('.block-editor-block-styles .block-editor-block-styles__item[aria-label="Animation Dash"]');
+		await page.click('.block-editor-block-styles .block-editor-block-styles__item[aria-label="Animation Dash"]');
 		const regex = new RegExp(
-			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo is-style-animation01">[^]*<!-- /wp:altslogo\\/altslogo -->`
+			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo is-style-animation-dash">[^]*<!-- /wp:altslogo\\/altslogo -->`
 		);
 		expect(await getEditedPostContent()).toMatch(regex);
 	})
