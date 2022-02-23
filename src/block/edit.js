@@ -22,7 +22,9 @@ import './editor.scss';
 
 export default function Edit({ setAttributes, attributes }) {
 	const { svgTag, logoTitle, width, siteUrl } = attributes;
+	// Get Site title
 	const [title, setTitle] = useEntityProp('root', 'site', 'title');
+	// Get Site url
 	const { url } = useSelect((select) => {
 		const { getEntityRecord } = select(coreStore);
 		const siteData = getEntityRecord('root', '__unstableBase');
@@ -31,29 +33,80 @@ export default function Edit({ setAttributes, attributes }) {
 		};
 	}, []);
 	// const ref = useRef();
-
 	// const clientWidth = useClientWidth(ref, [align]);
 
-	// widthが指定されたらviewBoxを変更する
-	const ChangeViewBox = () => {
+	/**
+	 * SanitizeSvg
+	 *
+	 * @param {*} string
+	 * @return {*} string
+	 */
+	const SanitizeSvg = (string) => {
+		const sanitizedSvg = DOMPurify.sanitize(string);
+		return sanitizedSvg;
+	};
+
+	/**
+	 * ParseSvg
+	 *
+	 * @param {*} string
+	 * @return {*} obj
+	 */
+	const ParseSvg = (string) => {
+		const parser = new window.DOMParser();
+		const parsedSvg = parser.parseFromString(string, 'image/svg+xml').firstChild;
+		return parsedSvg;
+	};
+
+	/**
+	 * SrializeSvg
+	 *
+	 * @param {*} obj
+	 * @return {*} string
+	 */
+	const SrializeSvg = (obj) => {
+		const serialize = new window.XMLSerializer();
+		const serializedSvg = serialize.serializeToString(obj);
+		return serializedSvg;
+	};
+
+	/**
+	 * AddA11yTags
+	 *
+	 * @param {*} string
+	 * @return {*} string
+	 */
+	const AddA11yTags = (string) => {
+		const ariaId = 'altslogoTitle';
+
+		const parsedSvg = ParseSvg(string);
+		parsedSvg.setAttribute('role', 'img');
+		parsedSvg.setAttribute('aria-describedby', ariaId);
+		const newTitle = document.createElement('title');
+		newTitle.setAttribute('id', ariaId);
+		const newTitleContent = document.createTextNode(logoTitle);
+		newTitle.appendChild(newTitleContent);
+		parsedSvg.appendChild(newTitle);
+		const serializedSvg = SrializeSvg(parsedSvg);
+		return serializedSvg;
+	};
+
+	/**
+	 * ChangeSvgSize
+	 */
+	const ChangeSvgSize = () => {
 		if (svgTag) {
-			const parser = new window.DOMParser();
-			const serialize = new window.XMLSerializer();
-			const parsedSvg = parser.parseFromString(svgTag, 'image/svg+xml').firstChild;
+			const parsedSvg = ParseSvg(svgTag);
 			// 初期設定のheightを取得
 			const viewBoxValue = parsedSvg.getAttribute('viewBox');
-			// console.log(viewBoxValue);
 			const viewBoxArr = viewBoxValue.split(' ');
 			const defaultWidth = parseInt(viewBoxArr[2]);
 			const defaultHeight = parseInt(viewBoxArr[3]);
 			const resizeHeight = Math.ceil((defaultHeight / defaultWidth) * parseInt(width));
-			// console.log(resizeHeight);
 			parsedSvg.setAttribute('width', width);
 			parsedSvg.setAttribute('height', resizeHeight);
-			// 文字列に戻す
-			const changedSvg = serialize.serializeToString(parsedSvg);
-			// console.log(changedSvg);
-			setAttributes({ svgTag: changedSvg });
+			const serializedSvg = SrializeSvg(parsedSvg);
+			setAttributes({ svgTag: serializedSvg });
 		}
 	};
 
@@ -62,7 +115,7 @@ export default function Edit({ setAttributes, attributes }) {
 			setAttributes({ logoTitle: title });
 		}
 		if (width) {
-			ChangeViewBox();
+			ChangeSvgSize();
 		}
 	});
 	return (
@@ -91,31 +144,12 @@ export default function Edit({ setAttributes, attributes }) {
 						onChange={(event) => {
 							if (event.target.files && event.target.files[0]) {
 								const file = event.target.files[0];
-								// console.log(file);
 								const reader = new window.FileReader();
-								const parser = new window.DOMParser();
-								const serialize = new window.XMLSerializer();
-								const ariaId = 'altslogoTitle';
 								reader.onload = (e) => {
-									// row SVGをサニタイズする
-									const cleanSvg = DOMPurify.sanitize(e.target.result);
-									// console.log(cleanSvg);
-									// titleTagなどを付与する
-									const parsedSvg = parser.parseFromString(cleanSvg, 'image/svg+xml').firstChild;
-									parsedSvg.setAttribute('role', 'img');
-									parsedSvg.setAttribute('aria-describedby', ariaId);
-									const newTitle = document.createElement('title');
-									newTitle.setAttribute('id', ariaId);
-									const newTitleContent = document.createTextNode(logoTitle);
-									newTitle.appendChild(newTitleContent);
-									parsedSvg.appendChild(newTitle);
-									// console.log(parsedSvg);
-									// 文字列に戻す
-									const a11ySvg = serialize.serializeToString(parsedSvg);
-									// console.log(a11ySvg);
+									const cleanSvg = SanitizeSvg(e.target.result);
+									const a11ySvg = AddA11yTags(cleanSvg);
 									// もう一度サニタイズをかけて整形
-									const rearrangedSvg = DOMPurify.sanitize(a11ySvg);
-									// console.log(rearrangedSvg);
+									const rearrangedSvg = SanitizeSvg(a11ySvg);
 									setAttributes({ svgTag: rearrangedSvg });
 									// siteUrlを設定する
 									setAttributes({ siteUrl: url });
