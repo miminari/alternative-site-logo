@@ -54,7 +54,7 @@ describe('Alternative Site Logo', () => {
 		await insertBlock('Alternative Site Logo');
 		await upload(`.wp-block-altslogo-altslogo input[type=file]`, 'upload_test_svg_horizontal.svg');
 		await page.waitForSelector('.wp-block-altslogo-altslogo iframe');
-		// Changing clientWidth
+		// Changing width
 		await openDocumentSettingsSidebar();
 		await page.waitForSelector('.components-panel input[aria-label="Image width"]');
 		await page.focus('.components-panel input[aria-label="Image width"]');
@@ -70,7 +70,7 @@ describe('Alternative Site Logo', () => {
 		await insertBlock('Alternative Site Logo');
 		await upload(`.wp-block-altslogo-altslogo input[type=file]`, 'upload_test_svg.svg');
 		await page.waitForSelector('.wp-block-altslogo-altslogo iframe');
-		// 現在のURLを取得
+		// Get current site url
 		const currentUrl = page.url();
 		const currentUrlArr = currentUrl.split('/');
 		const currentHome = currentUrlArr[0] + '//' + currentUrlArr[2];
@@ -79,4 +79,18 @@ describe('Alternative Site Logo', () => {
 		);
 		expect(await getEditedPostContent()).toMatch(regex);
 	});
+	it('can change the style to animation01', async () => {
+		await insertBlock('Alternative Site Logo');
+		await upload(`.wp-block-altslogo-altslogo input[type=file]`, 'upload_test_svg_horizontal.svg');
+		await page.waitForSelector('.wp-block-altslogo-altslogo iframe');
+		await openDocumentSettingsSidebar();
+		const animation01Button = await page.waitForXPath(
+			'//*[@role="menuitem"][contains(., "Animation01")]'
+		);
+		await animation01Button.click();
+		const regex = new RegExp(
+			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo is-style-animation01">[^]*<!-- /wp:altslogo\\/altslogo -->`
+		);
+		expect(await getEditedPostContent()).toMatch(regex);
+	})
 });
