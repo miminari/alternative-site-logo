@@ -11,27 +11,33 @@
 	}
 	&.is-style-animation-dash {
 		svg > *:not(title):not(defs) {
-			animation: dashdraw 3.2s cubic-bezier(0.77, 0.2, 0.05, 1);
+			animation: dashdraw 2.8s cubic-bezier(0.77, 0.2, 0.05, 1);
+			stroke-linecap: round;
+			stroke-linejoin: round;
+			stroke-width: 0.02rem;
 		}
 	}
 }
+
 @keyframes dashdraw {
 	0% {
 		opacity: 0;
-		stroke: #000;
-		stroke-width: 0.01rem;
-		stroke-dashoffset: 40;
-		stroke-dasharray: 80;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-		fill: none;
+    	stroke-dasharray: 30;
+		stroke-dashoffset: 10;
 	}
+  0%, 99% {
+    fill: rgba(0,0,0,0);
+    stroke: #000;
+  }
 	30% {
 		opacity: 1;
 	}
-	100% {
-		stroke-dashoffset: 400;
-    stroke-dasharray: 480;
-		stroke-dasharray: none;
-	}
+  99.9% {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 500;
+  }
+  100% {
+    fill: auto;
+    stroke: auto;
+  }
 }
