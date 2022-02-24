@@ -19,9 +19,9 @@
 		"packages-update": "wp-scripts packages-update",
 		"test:e2edev": "npx wp-scripts test-e2e --config tests/e2e/jest.config.js --puppeteer-interactive",
 		"test:e2e": "npx wp-scripts test-e2e --config tests/e2e/jest.config.js",
-		"dist:mkdir": "mkdir -p ./dist/alternative-site-logo/",
-		"dist:copy": "cp ./alternative-site-logo.php ./dist/alternative-site-logo/ & cp -R ./build/ ./dist/alternative-site-logo/ & cp -R ./src/block/index.php ./dist/alternative-site-logo/",
-		"dist:zip": "cd ./dist/ && bestzip alternative-site-logo.php *"
+		"dist:mkdir": "mkdir -p ./dist/alternative-site-logo/src/block/",
+		"dist:copy": "cp ./alternative-site-logo.php ./dist/alternative-site-logo/ & cp -R ./build/ ./dist/alternative-site-logo/build/ & cp -R ./src/block/index.php ./dist/alternative-site-logo/src/block/ & cp -R ./src/block/block.json ./dist/alternative-site-logo/src/block/",
+		"dist:zip": "cd ./dist/ && bestzip alternative-site-logo.zip *"
 	},
 	"dependencies": {
 		"@wordpress/block-editor": "^8.1.1",

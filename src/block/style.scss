@@ -10,7 +10,7 @@
 		max-width: 100%;
 	}
 	&.is-style-animation-dash {
-		svg > * {
+		svg > *:not(title):not(defs) {
 			animation: dashdraw 3.2s cubic-bezier(0.77, 0.2, 0.05, 1);
 		}
 	}
@@ -19,9 +19,9 @@
 	0% {
 		opacity: 0;
 		stroke: #000;
-		stroke-width: 1px;
-		stroke-dashoffset: 50;
-		stroke-dasharray: 300;
+		stroke-width: 0.01rem;
+		stroke-dashoffset: 40;
+		stroke-dasharray: 80;
 		stroke-linecap: round;
 		stroke-linejoin: round;
 		fill: none;
@@ -30,7 +30,8 @@
 		opacity: 1;
 	}
 	100% {
-		stroke-dashoffset: 500;
+		stroke-dashoffset: 400;
+    stroke-dasharray: 480;
 		stroke-dasharray: none;
 	}
 }
