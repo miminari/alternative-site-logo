@@ -3,7 +3,7 @@
 /**
  * Alternative Site Logo Block
  *
- * @package alternative-site-logo
+ * @package altslogo
  */
 
 function altslogo_create_block_init() {

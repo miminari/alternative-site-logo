@@ -16,6 +16,7 @@ node_modules/
 vendor/
 artifacts/
 build/
+dist/
 
 # Optional npm cache directory
 .npm
