@@ -71,6 +71,21 @@ export default function Edit({ setAttributes, attributes }) {
 	};
 
 	/**
+	 * hasTitle
+	 *
+	 * @param {*} obj
+	 * @return {*} string
+	 */
+	const hasTitle = (obj) => {
+		// console.log(obj);
+		// Check title tag.
+		const titleTag = obj.getElementsByTagName('title');
+		if (titleTag) {
+			return titleTag[0].textContent;
+		}
+	};
+
+	/**
 	 * AddA11yTags
 	 *
 	 * @param {*} string
@@ -80,13 +95,16 @@ export default function Edit({ setAttributes, attributes }) {
 		const ariaId = 'altslogoTitle';
 
 		const parsedSvg = ParseSvg(string);
+
 		parsedSvg.setAttribute('role', 'img');
 		parsedSvg.setAttribute('aria-describedby', ariaId);
-		const newTitle = document.createElement('title');
-		newTitle.setAttribute('id', ariaId);
-		const newTitleContent = document.createTextNode(logoTitle);
-		newTitle.appendChild(newTitleContent);
-		parsedSvg.appendChild(newTitle);
+		if (!hasTitle(parsedSvg)) {
+			const newTitle = document.createElement('title');
+			newTitle.setAttribute('id', ariaId);
+			const newTitleContent = document.createTextNode(logoTitle);
+			newTitle.appendChild(newTitleContent);
+			parsedSvg.appendChild(newTitle);
+		}
 		const serializedSvg = SrializeSvg(parsedSvg);
 		return serializedSvg;
 	};
@@ -97,7 +115,7 @@ export default function Edit({ setAttributes, attributes }) {
 	const ChangeSvgSize = () => {
 		if (svgTag) {
 			const parsedSvg = ParseSvg(svgTag);
-			// 初期設定のheightを取得
+			// Get the default height.
 			const viewBoxValue = parsedSvg.getAttribute('viewBox');
 			const viewBoxArr = viewBoxValue.split(' ');
 			const defaultWidth = parseInt(viewBoxArr[2]);
@@ -148,13 +166,13 @@ export default function Edit({ setAttributes, attributes }) {
 								reader.onload = (e) => {
 									const cleanSvg = SanitizeSvg(e.target.result);
 									const a11ySvg = AddA11yTags(cleanSvg);
-									// もう一度サニタイズをかけて整形
+									// Sanitize and rearranged again.
 									const rearrangedSvg = SanitizeSvg(a11ySvg);
 									setAttributes({ svgTag: rearrangedSvg });
-									// siteUrlを設定する
+									// Setup siteUrl.
 									setAttributes({ siteUrl: url });
 								};
-								// 取得したファイルから中身を読み出す
+								// Read the contents from the fetched file.
 								reader.readAsText(file);
 							}
 						}}
