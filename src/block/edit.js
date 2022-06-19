@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import DOMPurify from 'dompurify';
-
-/**
  * WordPress dependencies
  */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
@@ -22,7 +17,7 @@ import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 /**
  * Internal dependencies
  */
-// import useClientWidth from './use-client-width';
+import { SanitizeSvg, ParseSvg, SrializeSvg } from '../utils/editSvg';
 
 import './editor.scss';
 
@@ -38,44 +33,6 @@ export default function Edit({ setAttributes, attributes }) {
 			url: siteData?.url,
 		};
 	}, []);
-
-	/**
-	 * SanitizeSvg
-	 *
-	 * @param {*} string
-	 * @return {*} string
-	 */
-	const SanitizeSvg = (string) => {
-		const sanitizedSvg = DOMPurify.sanitize(string);
-		return sanitizedSvg;
-	};
-
-	/**
-	 * ParseSvg
-	 *
-	 * @param {*} string
-	 * @return {*} obj
-	 */
-	const ParseSvg = (string) => {
-		const parser = new window.DOMParser();
-		const parsedSvg = parser.parseFromString(
-			string,
-			'image/svg+xml'
-		).firstChild;
-		return parsedSvg;
-	};
-
-	/**
-	 * SrializeSvg
-	 *
-	 * @param {*} obj
-	 * @return {*} string
-	 */
-	const SrializeSvg = (obj) => {
-		const serialize = new window.XMLSerializer();
-		const serializedSvg = serialize.serializeToString(obj);
-		return serializedSvg;
-	};
 
 	/**
 	 * hasAriaDescribedby
