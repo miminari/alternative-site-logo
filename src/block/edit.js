@@ -79,6 +79,20 @@ export default function Edit({ setAttributes, attributes }) {
 	};
 
 	/**
+	 * hasAriaDescribedby
+	 *
+	 * @param {*} obj
+	 * @return {*} boolean
+	 */
+	const hasAriaDescribedby = (obj) => {
+		const ariaDescribedby = obj.getAttribute('aria-describedby');
+		if (ariaDescribedby && ariaDescribedby.length > 0) {
+			return true;
+		}
+		return false;
+	};
+
+	/**
 	 * hasTitle
 	 *
 	 * @param {*} obj
@@ -104,7 +118,9 @@ export default function Edit({ setAttributes, attributes }) {
 		const parsedSvg = ParseSvg(string);
 
 		parsedSvg.setAttribute('role', 'img');
-		parsedSvg.setAttribute('aria-describedby', ariaId);
+		if (!hasAriaDescribedby(parsedSvg)) {
+			parsedSvg.setAttribute('aria-describedby', ariaId);
+		}
 		if (!hasTitle(parsedSvg)) {
 			const newTitle = document.createElement('title');
 			newTitle.setAttribute('id', ariaId);
@@ -162,9 +178,9 @@ export default function Edit({ setAttributes, attributes }) {
 			</InspectorControls>
 			<div {...useBlockProps()}>
 				{svgTag ? (
-					<a href={siteUrl}>
+					// <a href={siteUrl}>
 						<SandBox html={svgTag} />
-					</a>
+					// </a>
 				) : (
 					<FormFileUpload
 						accept="image/svg+xml"
