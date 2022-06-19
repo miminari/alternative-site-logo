@@ -1,7 +1,11 @@
 /**
  * WordPress dependencies
  */
-import { visitAdminPage, switchUserToAdmin, switchUserToTest } from '@wordpress/e2e-test-utils';
+import {
+	visitAdminPage,
+	switchUserToAdmin,
+	switchUserToTest,
+} from '@wordpress/e2e-test-utils';
 
 /**
  * Visits general settings page and changes the language to the given vaule.

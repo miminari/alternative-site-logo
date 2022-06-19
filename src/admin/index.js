@@ -31,7 +31,10 @@ const Admin = () => {
 	const addNameSpace = (data) => {
 		data.trim();
 		if (data.indexOf(`http://www.w3.org/2000/svg`) < 0) {
-			data = data.replace(/<svg/g, `<svg xmlns="http://www.w3.org/2000/svg"`);
+			data = data.replace(
+				/<svg/g,
+				`<svg xmlns="http://www.w3.org/2000/svg"`
+			);
 		}
 		return data;
 	};
@@ -84,7 +87,11 @@ const Admin = () => {
 		<div className="wrapper">
 			<h1>Alternative Site Logo Config</h1>
 			<div className="logo-svg">
-				<TextControl label="Logo SVG" value={rowSvg} onChange={(value) => setText(value)} />
+				<TextControl
+					label="Logo SVG"
+					value={rowSvg}
+					onChange={(value) => setText(value)}
+				/>
 			</div>
 			<Button isPrimary onClick={onClick}>
 				設定を保存
