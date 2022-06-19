@@ -77,10 +77,9 @@ export default function Edit({ setAttributes, attributes }) {
 	 * @return {*} string
 	 */
 	const hasTitle = (obj) => {
-		// console.log(obj);
 		// Check title tag.
 		const titleTag = obj.getElementsByTagName('title');
-		if (titleTag) {
+		if (titleTag.length > 0) {
 			return titleTag[0].textContent;
 		}
 	};
