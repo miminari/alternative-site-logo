@@ -12,6 +12,7 @@ import {
 	FormFileUpload,
 	PanelBody,
 	RangeControl,
+	TextareaControl,
 	SandBox,
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
@@ -28,7 +29,7 @@ import './editor.scss';
 export default function Edit({ setAttributes, attributes }) {
 	const { svgTag, logoTitle, width, siteUrl } = attributes;
 	// Get Site title
-	const [title, setTitle] = useEntityProp('root', 'site', 'title');
+	const [title] = useEntityProp('root', 'site', 'title');
 	// Get Site url
 	const { url } = useSelect((select) => {
 		const { getEntityRecord } = select(coreStore);
@@ -37,8 +38,6 @@ export default function Edit({ setAttributes, attributes }) {
 			url: siteData?.url,
 		};
 	}, []);
-	// const ref = useRef();
-	// const clientWidth = useClientWidth(ref, [align]);
 
 	/**
 	 * SanitizeSvg
@@ -96,14 +95,35 @@ export default function Edit({ setAttributes, attributes }) {
 	 * hasTitle
 	 *
 	 * @param {*} obj
-	 * @return {*} string
+	 * @return {*} boolean
 	 */
 	const hasTitle = (obj) => {
 		// Check title tag.
 		const titleTag = obj.getElementsByTagName('title');
 		if (titleTag.length > 0) {
-			return titleTag[0].textContent;
+			setAttributes({ logoTitle: titleTag[0].textContent });
+			return true;
 		}
+		return false;
+	};
+
+	/**
+	 * updateSvgTitle
+	 *
+	 * @param {*} string
+	 * @param {*} newTitle
+	 * @return {*} boolean
+	 */
+	const updateSvgTitle = (string, newTitle) => {
+		const parsedSvg = ParseSvg(string);
+		const titleTag = parsedSvg.getElementsByTagName('title');
+		if (titleTag.length > 0) {
+			titleTag[0].innerText = newTitle;
+			const serializedSvg = SrializeSvg(parsedSvg);
+			setAttributes({ svgTag: serializedSvg });
+			return true;
+		}
+		return false;
 	};
 
 	/**
@@ -157,10 +177,13 @@ export default function Edit({ setAttributes, attributes }) {
 		if (!logoTitle) {
 			setAttributes({ logoTitle: title });
 		}
+	}, []);
+	useEffect(() => {
 		if (width) {
 			ChangeSvgSize();
 		}
 	});
+
 	return (
 		<>
 			<InspectorControls>
@@ -174,13 +197,30 @@ export default function Edit({ setAttributes, attributes }) {
 						min={1}
 						max={2000}
 					/>
+					{svgTag && (
+						<TextareaControl
+							label={__('Title / Alt text (alternative text)')}
+							value={logoTitle}
+							onChange={(newTitle) => {
+								setAttributes({ logoTitle: newTitle });
+								updateSvgTitle(svgTag, newTitle);
+							}}
+							help={
+								<>
+									{__(
+										'The default value is the site title. If this value is changed, only the logo title will change, not the site title.'
+									)}
+								</>
+							}
+						/>
+					)}
 				</PanelBody>
 			</InspectorControls>
 			<div {...useBlockProps()}>
 				{svgTag ? (
-					// <a href={siteUrl}>
+					<a href={siteUrl}>
 						<SandBox html={svgTag} />
-					// </a>
+					</a>
 				) : (
 					<FormFileUpload
 						accept="image/svg+xml"
