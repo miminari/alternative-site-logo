@@ -8,7 +8,12 @@ import DOMPurify from 'dompurify';
  */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { FormFileUpload, PanelBody, RangeControl, SandBox } from '@wordpress/components';
+import {
+	FormFileUpload,
+	PanelBody,
+	RangeControl,
+	SandBox,
+} from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
@@ -54,7 +59,10 @@ export default function Edit({ setAttributes, attributes }) {
 	 */
 	const ParseSvg = (string) => {
 		const parser = new window.DOMParser();
-		const parsedSvg = parser.parseFromString(string, 'image/svg+xml').firstChild;
+		const parsedSvg = parser.parseFromString(
+			string,
+			'image/svg+xml'
+		).firstChild;
 		return parsedSvg;
 	};
 
@@ -119,7 +127,9 @@ export default function Edit({ setAttributes, attributes }) {
 			const viewBoxArr = viewBoxValue.split(' ');
 			const defaultWidth = parseInt(viewBoxArr[2]);
 			const defaultHeight = parseInt(viewBoxArr[3]);
-			const resizeHeight = Math.ceil((defaultHeight / defaultWidth) * parseInt(width));
+			const resizeHeight = Math.ceil(
+				(defaultHeight / defaultWidth) * parseInt(width)
+			);
 			parsedSvg.setAttribute('width', width);
 			parsedSvg.setAttribute('height', resizeHeight);
 			const serializedSvg = SrializeSvg(parsedSvg);
@@ -163,7 +173,9 @@ export default function Edit({ setAttributes, attributes }) {
 								const file = event.target.files[0];
 								const reader = new window.FileReader();
 								reader.onload = (e) => {
-									const cleanSvg = SanitizeSvg(e.target.result);
+									const cleanSvg = SanitizeSvg(
+										e.target.result
+									);
 									const a11ySvg = AddA11yTags(cleanSvg);
 									// Sanitize and rearranged again.
 									const rearrangedSvg = SanitizeSvg(a11ySvg);

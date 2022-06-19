@@ -6,7 +6,7 @@
 	"title": "Alternative Site Logo",
 	"category": "design",
 	"description": "More freedom, more beauty. You can use a SVG file for your site logo.",
-	"keywords": [ "logo" ],
+	"keywords": ["logo"],
 	"supports": {
 		"anchor": true,
 		"html": false,
