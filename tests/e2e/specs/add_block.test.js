@@ -115,4 +115,12 @@ describe('Alternative Site Logo', () => {
 		);
 		expect(await getEditedPostContent()).toMatch(regex);
 	});
+	it('should keep the original title tag', async () => {
+		await insertBlock('Alternative Site Logo');
+		await upload(`.wp-block-altslogo-altslogo input[type=file]`, 'upload_test_svg_has_title.svg');
+		const regex = new RegExp(
+			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo">\\s*<a [^>]*>\\s*<svg aria-describedby="[^"]+" role="img" [^]+>[^]*<title id="[^"]+"[^>]+>Code is Poetry<\\/title>[^]*<\\/svg>\\s*<\\/a>\\s*<\\/div>\\s*<!-- /wp:altslogo\\/altslogo -->`
+		);
+		expect(await getEditedPostContent()).toMatch(regex);
+	});
 });
