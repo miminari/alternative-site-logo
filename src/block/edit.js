@@ -180,6 +180,7 @@ export default function Edit({ setAttributes, attributes }) {
 					</a>
 				) : (
 					<FormFileUpload
+						variant="primary"
 						accept="image/svg+xml"
 						onChange={(event) => {
 							if (event.target.files && event.target.files[0]) {
@@ -201,7 +202,7 @@ export default function Edit({ setAttributes, attributes }) {
 							}
 						}}
 					>
-						Upload
+						{__('Upload')}
 					</FormFileUpload>
 				)}
 			</div>
