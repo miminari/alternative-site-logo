@@ -117,9 +117,19 @@ export default function Edit({ setAttributes, attributes }) {
 			const parsedSvg = ParseSvg(svgTag);
 			// Get the default height.
 			const viewBoxValue = parsedSvg.getAttribute('viewBox');
-			const viewBoxArr = viewBoxValue.split(' ');
-			const defaultWidth = parseInt(viewBoxArr[2]);
-			const defaultHeight = parseInt(viewBoxArr[3]);
+			let defaultWidth = parseInt(width);
+			let defaultHeight = parseInt(width);
+			if (!viewBoxValue) {
+				// set up viewBox
+				parsedSvg.setAttribute(
+					'viewBox',
+					`0 0 ${parseInt(width)} ${parseInt(width)}`
+				);
+			} else {
+				const viewBoxArr = viewBoxValue.split(' ');
+				defaultWidth = parseInt(viewBoxArr[2]);
+				defaultHeight = parseInt(viewBoxArr[3]);
+			}
 			const resizeHeight = Math.ceil(
 				(defaultHeight / defaultWidth) * parseInt(width)
 			);
