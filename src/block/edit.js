@@ -139,7 +139,6 @@ export default function Edit({ setAttributes, attributes }) {
 			setAttributes({ svgTag: serializedSvg });
 		}
 	};
-
 	useEffect(() => {
 		if (!logoTitle) {
 			setAttributes({ logoTitle: title });
