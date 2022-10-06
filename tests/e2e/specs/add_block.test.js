@@ -126,4 +126,25 @@ describe('Alternative Site Logo', () => {
 		);
 		expect(await getEditedPostContent()).toMatch(regex);
 	});
+	it('should add the viewBox Value "0 0 100 100" if the upload file does not have the viewBox value when it changes the width', async () => {
+		await insertBlock('Alternative Site Logo');
+		await upload(
+			`.wp-block-altslogo-altslogo input[type=file]`,
+			'upload_test_svg_not_viewBoxValue.svg'
+		);
+		await page.waitForSelector('.wp-block-altslogo-altslogo iframe');
+		// Changing width
+		await openDocumentSettingsSidebar();
+		await page.waitForSelector(
+			'.components-panel input[aria-label="Image width"]'
+		);
+		await page.focus('.components-panel input[aria-label="Image width"]');
+		await page.keyboard.press('Tab');
+		await page.keyboard.type('120');
+		await page.keyboard.press('Escape');
+		const regex = new RegExp(
+			`<!-- wp:altslogo\\/altslogo [^]+ -->\\s*<div class="wp-block-altslogo-altslogo">\\s*<a [^>]+>\\s*<svg [^>]* viewBox="0 0 100 100"[^>]*>[^]*<\\/svg>\\s*<\\/a>\\s*<\\/div>\\s*<!-- /wp:altslogo\\/altslogo -->`
+		);
+		expect(await getEditedPostContent()).toMatch(regex);
+	});
 });

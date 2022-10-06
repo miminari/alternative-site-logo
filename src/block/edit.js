@@ -121,10 +121,7 @@ export default function Edit({ setAttributes, attributes }) {
 			let defaultHeight = parseInt(width);
 			if (!viewBoxValue) {
 				// set up viewBox
-				parsedSvg.setAttribute(
-					'viewBox',
-					`0 0 ${parseInt(width)} ${parseInt(width)}`
-				);
+				parsedSvg.setAttribute('viewBox', `0 0 100 100`);
 			} else {
 				const viewBoxArr = viewBoxValue.split(' ');
 				defaultWidth = parseInt(viewBoxArr[2]);
